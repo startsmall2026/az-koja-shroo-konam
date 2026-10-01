@@ -368,30 +368,6 @@ padding-top:18px;
 
 }
 
-</style><style>
-@media (max-width: 600px) {
-  body {
-    padding: 12px !important;
-  }
-
-  .container {
-    width: 100% !important;
-  }
-
-  input,
-  button {
-    width: 100% !important;
-    box-sizing: border-box;
-  }
-
-  h1 {
-    font-size: 32px !important;
-  }
-
-  .card {
-    padding: 16px !important;
-  }
-}
 </style>
 </head>
 
@@ -492,7 +468,6 @@ placeholder="مثلاً می‌خوام برنامه‌نویسی یاد بگی�
 <script>
 
 let currentSteps=[];
-
 function start(){
 
 let goal=document.getElementById("goal").value.trim();
@@ -505,6 +480,20 @@ return;
 let steps;
 
 if(
+goal.includes("فتوشاپ") ||
+goal.includes("طراحی") ||
+goal.includes("گرافیک")
+){
+steps=[
+"۱. آشنایی با محیط و ابزارهای اصلی",
+"۲. یادگیری لایه‌ها و ماسک‌ها",
+"۳. تمرین ابزارهای انتخاب و برش",
+"۴. یادگیری رنگ و نور",
+"۵. ساخت یک پروژه ساده"
+];
+}
+
+else if(
 goal.includes("برنامه") ||
 goal.includes("کدنویسی") ||
 goal.includes("پایتون") ||
@@ -515,7 +504,8 @@ steps=[
 "۱. انتخاب زبان برنامه‌نویسی",
 "۲. نصب ابزارهای لازم",
 "۳. یادگیری مفاهیم پایه",
-"۴. ساخت اولین پروژه"
+"۴. تمرین با پروژه‌های کوچک",
+"۵. ساخت اولین پروژه"
 ];
 }
 
@@ -526,10 +516,10 @@ goal.includes("زبان")
 steps=[
 "۱. مشخص کردن سطح فعلی",
 "۲. یادگیری کلمات پرکاربرد",
-"۳. تمرین شنیدن و صحبت کردن",
-"۴. تمرین روزانه"
-];
-}else if(
+"۳. تمرین جمله‌سازی",
+"۴. تمرین شنیدن و صحبت کردن",
+"۵. مرور و تمرین روزانه"
+];else if(
 goal.includes("ورزش") ||
 goal.includes("باشگاه") ||
 goal.includes("تمرین")
@@ -538,7 +528,8 @@ steps=[
 "۱. مشخص کردن هدف",
 "۲. انتخاب فعالیت مناسب",
 "۳. شروع با تمرین سبک",
-"۴. ادامه دادن منظم"
+"۴. یادگیری حرکات درست",
+"۵. ادامه دادن منظم"
 ];
 }
 
@@ -550,8 +541,9 @@ goal.includes("امتحان")
 steps=[
 "۱. مشخص کردن موضوع",
 "۲. تقسیم مطالب به بخش‌های کوچک",
-"۳. مطالعه و تمرین",
-"۴. مرور مطالب"
+"۳. مطالعه و یادگیری",
+"۴. حل نمونه سؤال",
+"۵. مرور مطالب"
 ];
 }
 
@@ -562,10 +554,13 @@ goal.includes("یادگیری")
 steps=[
 "۱. مشخص کردن مهارت موردنظر",
 "۲. پیدا کردن منابع مناسب",
-"۳. تمرین یک بخش کوچک",
-"۴. تمرین منظم"
+"۳. یادگیری یک بخش کوچک",
+"۴. تمرین عملی",
+"۵. ساخت یک پروژه کوچک"
 ];
-}else{
+}
+
+else{
 steps=[
 "۱. هدفت رو دقیق مشخص کن",
 "۲. اطلاعات اولیه رو پیدا کن",
@@ -577,13 +572,16 @@ steps=[
 currentSteps=steps;
 
 document.getElementById("title").innerText=
-"مسیر شروع برای: "+goal;
-
-let stepElements=document.querySelectorAll(".step");
+"مسیر شروع برای: "+goal;let stepElements=document.querySelectorAll(".step");
 
 stepElements.forEach(function(step,index){
 
+if(currentSteps[index]){
 step.innerText=currentSteps[index];
+step.style.display="block";
+}else{
+step.style.display="none";
+}
 
 step.classList.remove("done");
 
@@ -608,7 +606,7 @@ behavior:"smooth"
 });
 
 }
-
+}
 function updateProgress(){
 
 let steps=document.querySelectorAll(".step");
