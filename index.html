@@ -2,133 +2,179 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>از کجا شروع کنم؟</title>
 
 <style>
+
 *{
 box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-margin:0;
 font-family:Tahoma,Arial,sans-serif;
-color:white;
-text-align:center;
 min-height:100vh;
+padding:20px;
+color:#fff;
 background:
-radial-gradient(circle at top,#7b168b55,transparent 35%),
-linear-gradient(135deg,#100022,#4d075c,#087ea4);
+radial-gradient(circle at 15% 20%,#8b5cf655,transparent 30%),
+radial-gradient(circle at 85% 80%,#06b6d455,transparent 30%),
+linear-gradient(135deg,#050816,#15113b,#041c27);
 overflow-x:hidden;
 }
 
-body::before{
-content:"";
-position:fixed;
-width:300px;
-height:300px;
-border-radius:50%;
-background:#ff3cac22;
-filter:blur(80px);
-top:10%;
-left:5%;
-animation:float 7s ease-in-out infinite;
-pointer-events:none;
-}
-
-body::after{
-content:"";
-position:fixed;
-width:260px;
-height:260px;
-border-radius:50%;
-background:#00d4ff22;
-filter:blur(80px);
-bottom:5%;
-right:5%;
-animation:float 9s ease-in-out infinite reverse;
-pointer-events:none;
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0) translateX(0)}
-50%{transform:translateY(-30px) translateX(20px)}
-}
-
-.box{
-width:90%;
-max-width:950px;
+.container{
+width:min(760px,100%);
 margin:auto;
-position:relative;
-z-index:1;
-}
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:25px 0;
-animation:slideDown .8s ease;
-}
-
-@keyframes slideDown{
-from{opacity:0;transform:translateY(-20px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-.logo{
-font-size:22px;
-font-weight:bold;
-}
-
-.logo span{
-color:#ff5cac;
-}
-
-.start-badge{
-padding:10px 18px;
-border-radius:30px;
-background:#ffffff18;
-border:1px solid #ffffff20;
-backdrop-filter:blur(10px);
+padding-top:45px;
 }
 
 .hero{
-padding-top:35px;
+text-align:center;
+animation:fadeDown .8s ease;
 }
 
 .badge{
 display:inline-block;
-padding:10px 18px;
+padding:9px 18px;
 border-radius:30px;
 background:#ffffff12;
-border:1px solid #ffffff20;
-animation:fadeUp .8s ease;
+border:1px solid #ffffff25;
+box-shadow:0 0 25px #8b5cf655;
+margin-bottom:20px;
 }
 
 h1{
-font-size:clamp(40px,7vw,68px);
-margin:30px 0 15px;
-animation:fadeUp 1s ease;
+font-size:50px;
+margin-bottom:14px;
+text-shadow:0 0 35px #8b5cf688;
 }
 
-h1 span{
-color:#ff65b5;
-text-shadow:0 0 25px #ff3cac66;
-}p{
-color:#ddd;
-font-size:18px;
-line-height:2;
+.subtitle{
+color:#d5d8e5;
+line-height:1.9;
+font-size:17px;
 }
 
-.hero-text{
-animation:fadeUp 1.2s ease;
+.card{
+margin-top:30px;
+padding:27px;
+border-radius:28px;
+background:#ffffff0d;
+border:1px solid #ffffff20;
+backdrop-filter:blur(20px);
+box-shadow:0 25px 80px #0009;
+animation:fadeUp .8s ease;
 }
 
-@keyframes fadeUp{
+input{
+width:100%;
+padding:18px;
+border-radius:17px;
+border:1px solid #ffffff22;
+outline:none;
+background:#ffffff0c;
+color:white;
+font-size:16px;
+margin-bottom:14px;
+transition:.3s;
+}
+
+input::placeholder{
+color:#aeb4c4;
+}
+
+input:focus{
+border-color:#8b5cf6;
+box-shadow:0 0 25px #8b5cf655;
+transform:translateY(-2px);
+}
+
+button{
+width:100%;
+padding:17px;
+border:0;
+border-radius:17px;
+font-size:16px;
+font-weight:bold;
+color:white;
+cursor:pointer;
+background:linear-gradient(135deg,#8b5cf6,#06b6d4);
+box-shadow:0 12px 35px #06b6d444;
+transition:.25s;
+}
+
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 18px 45px #06b6d666;
+}#result{
+display:none;
+}
+
+#title{
+font-size:25px;
+margin-bottom:20px;
+}
+
+.progressTop{
+display:flex;
+justify-content:space-between;
+color:#d7d9e4;
+margin-bottom:9px;
+}
+
+.progress{
+height:13px;
+background:#ffffff12;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+#progressBar{
+height:100%;
+width:0%;
+border-radius:20px;
+background:linear-gradient(90deg,#8b5cf6,#06b6d4);
+box-shadow:0 0 18px #06b6d4;
+transition:width .5s ease;
+}
+
+.step{
+padding:17px;
+margin:12px 0;
+border-radius:18px;
+background:#ffffff0b;
+border:1px solid #ffffff18;
+cursor:pointer;
+transition:.3s;
+animation:stepIn .5s ease both;
+}
+
+.step:hover{
+transform:translateX(-6px);
+background:#ffffff16;
+box-shadow:0 8px 25px #0005;
+}
+
+.step.done{
+text-decoration:line-through;
+opacity:.5;
+}
+
+.step.done::before{
+content:"✓ ";
+color:#22c55e;
+font-weight:bold;
+}
+
+@keyframes fadeDown{
 from{
 opacity:0;
-transform:translateY(25px);
+transform:translateY(-30px);
 }
 to{
 opacity:1;
@@ -136,82 +182,7 @@ transform:translateY(0);
 }
 }
 
-.input{
-display:flex;
-margin:35px auto;
-max-width:720px;
-padding:7px;
-border-radius:20px;
-background:#ffffff12;
-border:1px solid #ffffff22;
-backdrop-filter:blur(12px);
-box-shadow:0 15px 40px #00000022;
-animation:fadeUp 1.4s ease;
-}
-
-input{
-flex:1;
-border:0;
-outline:0;
-background:transparent;
-color:white;
-padding:18px;
-font-size:16px;
-font-family:inherit;
-}
-
-input::placeholder{
-color:#bbb;
-}
-
-button{
-border:0;
-border-radius:15px;
-padding:15px 25px;
-background:linear-gradient(135deg,#ff3cac,#784ba0);
-color:white;
-font-size:16px;
-font-family:inherit;
-cursor:pointer;
-transition:.3s;
-box-shadow:0 8px 25px #ff3cac44;
-}
-
-button:hover{
-transform:translateY(-3px) scale(1.03);
-box-shadow:0 12px 30px #ff3cac66;
-}
-
-button:active{
-transform:scale(.97);
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-margin:55px 0;
-}
-
-.card{
-padding:28px 20px;
-border-radius:22px;
-background:#ffffff10;
-border:1px solid #ffffff20;
-backdrop-filter:blur(10px);
-transition:.35s;
-animation:cardIn .8s ease both;
-}
-
-.card:nth-child(2){
-animation-delay:.15s;
-}
-
-.card:nth-child(3){
-animation-delay:.3s;
-}
-
-@keyframes cardIn{
+@keyframes fadeUp{
 from{
 opacity:0;
 transform:translateY(30px);
@@ -220,372 +191,271 @@ to{
 opacity:1;
 transform:translateY(0);
 }
-}.card:hover{
-transform:translateY(-8px);
-background:#ffffff1c;
-border-color:#ffffff40;
 }
 
-.icon{
-font-size:42px;
-margin-bottom:10px;
-}
-
-.card h3{
-font-size:20px;
-}
-
-.card p{
-font-size:15px;
-color:#ccc;
-}
-
-#result{
-display:none;
-background:#fff;
-color:#222;
-padding:28px;
-border-radius:25px;
-margin:20px 0 60px;
-text-align:right;
-box-shadow:0 20px 60px #00000035;
-animation:resultIn .6s ease;
-}
-
-@keyframes resultIn{
+@keyframes stepIn{
 from{
 opacity:0;
-transform:translateY(30px) scale(.98);
+transform:translateX(25px);
 }
 to{
 opacity:1;
-transform:translateY(0) scale(1);
+transform:translateX(0);
 }
-}
-
-#title{
-text-align:center;
-margin-top:0;
-color:#4d075c;
-}
-
-.progress-info{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin:20px 0 8px;
-font-size:14px;
-color:#555;
-}
-
-.progress-track{
-width:100%;
-height:10px;
-background:#eee;
-border-radius:20px;
-overflow:hidden;
-}
-
-.progress-bar{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#ff3cac,#784ba0);
-border-radius:20px;
-transition:.5s ease;
-}
-
-.step{
-padding:17px;
-margin:11px 0;
-border-radius:14px;
-background:#f1f1f1;
-cursor:pointer;
-color:#222;
-border:2px solid transparent;
-transition:.3s;
-user-select:none;
-}
-
-.step:hover{
-background:#e8dff0;
-transform:translateX(-4px);
-}
-
-.step.done{
-background:#e7f8ed;
-border-color:#35b86b;
-color:#26844d;
-text-decoration:line-through;
-opacity:.7;
-}
-
-.step.done::before{
-content:"✓ ";
-font-weight:bold;
-}.finish{
+}#finish{
 display:none;
 text-align:center;
+margin-top:20px;
+padding:22px;
+border-radius:20px;
+background:#22c55e18;
+border:1px solid #22c55e44;
+box-shadow:0 0 30px #22c55e22;
+animation:pop .5s ease;
+}
+
+.newGoal{
+margin-top:14px;
+background:#ffffff12;
+box-shadow:none;
+}
+
+.confetti{
+position:fixed;
+top:-20px;
+width:9px;
+height:9px;
+border-radius:2px;
+pointer-events:none;
+z-index:99;
+animation:fall 2.2s linear forwards;
+}
+
+@keyframes pop{
+0%{
+opacity:0;
+transform:scale(.8);
+}
+70%{
+transform:scale(1.06);
+}
+100%{
+opacity:1;
+transform:scale(1);
+}
+}
+
+@keyframes fall{
+from{
+transform:translateY(0) rotate(0);
+opacity:1;
+}
+to{
+transform:translateY(105vh) rotate(720deg);
+opacity:0;
+}
+}
+
+@media(max-width:600px){
+
+body{
+padding:12px;
+}
+
+.container{
+padding-top:25px;
+}
+
+h1{
+font-size:34px;
+}
+
+.subtitle{
+font-size:15px;
+}
+
+.card{
 padding:18px;
-margin-top:18px;
-border-radius:16px;
-background:linear-gradient(135deg,#fff1fb,#eefaff);
-color:#5b0b63;
-font-weight:bold;
-animation:fadeUp .5s ease;
+border-radius:22px;
 }
 
-.reset{
-display:block;
-margin:20px auto 0;
-background:#eee;
-color:#4d075c;
-box-shadow:none;
-}
-
-.reset:hover{
-background:#ddd;
-box-shadow:none;
-}
-
-@media(max-width:700px){
-
-.cards{
-grid-template-columns:1fr;
-}
-
-.input{
-flex-direction:column;
-gap:8px;
-}
-
-button{
-padding:16px;
-}
-
-header{
-padding-top:18px;
-}
-
-}
-
-</style>
+}</style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<header>
-<div class="logo">
-از کجا <span>شروع کنم؟</span>
-</div>
-
-<div class="start-badge">
-🚀 شروع کن
-</div>
-</header>
-
-<section class="hero">
+<div class="hero">
 
 <div class="badge">
-✨ هر هدف بزرگی از یک قدم شروع میشه
+🚀 از کجا شروع کنم؟
 </div>
 
 <h1>
-نمی‌دونی از کجا
-<span>شروع کنی؟</span>
+از کجا شروع کنم؟
 </h1>
 
-<p class="hero-text">
-هدفت رو بنویس تا مسیر شروع رو پیدا کنیم.
+<p class="subtitle">
+هدفت رو بنویس تا قدم‌به‌قدم مسیر شروع رو برات بسازم.
 </p>
 
-<div class="input">
+</div>
+
+<div class="card">
 
 <input
 id="goal"
-placeholder="مثلاً می‌خوام برنامه‌نویسی یاد بگیرم"
+type="text"
+placeholder="مثلاً: یادگیری فتوشاپ"
 >
 
 <button onclick="start()">
-شروع کنیم 🚀
+✨ شروع کنیم
 </button>
 
 </div>
 
-</section><section class="cards">
+<div class="card" id="result">
 
-<div class="card">
-<div class="icon">🎯</div>
-<h3>هدفت رو بگو</h3>
-<p>هدف بزرگت رو بنویس.</p>
-</div>
+<h2 id="title">
+مسیر شروع
+</h2>
 
-<div class="card">
-<div class="icon">🧩</div>
-<h3>قدم‌ها رو پیدا کن</h3>
-<p>هدفت رو به کارهای ساده تبدیل می‌کنیم.</p>
-</div>
-
-<div class="card">
-<div class="icon">🔥</div>
-<h3>شروع کن</h3>
-<p>قدم‌ها رو یکی‌یکی انجام بده.</p>
-</div>
-
-</section>
-
-<section id="result">
-
-<h2 id="title"></h2>
-
-<div class="progress-info">
+<div class="progressTop">
 <span>پیشرفت</span>
-<span id="progressText">۰ از ۴</span>
+<span id="progressText">0 از 0</span>
 </div>
 
-<div class="progress-track">
-<div class="progress-bar" id="progressBar"></div>
+<div class="progress">
+<div id="progressBar"></div>
 </div>
 
+<div id="steps">
+
+<div class="step"></div>
+<div class="step"></div>
 <div class="step"></div>
 <div class="step"></div>
 <div class="step"></div>
 <div class="step"></div>
 
-<div class="finish" id="finish">
-🎉 آفرین! همه قدم‌ها رو انجام دادی!
 </div>
 
-<button class="reset" onclick="newGoal()">
+<div id="finish">
+🎉 عالیه! همه‌ی قدم‌ها رو انجام دادی!
+</div>
+
+<button class="newGoal" onclick="newGoal()">
 🔄 هدف جدید
 </button>
 
-</section>
-
 </div>
 
-<script>
+</div><script>
 
-let currentSteps=[];
-function start(){
+let currentSteps = [];
 
-let goal=document.getElementById("goal").value.trim();
+const goalSteps = {
+
+"برنامه نویسی":[
+"انتخاب زبان برنامه‌نویسی",
+"یادگیری مفاهیم پایه",
+"نصب ابزارهای لازم",
+"نوشتن اولین برنامه",
+"تمرین با پروژه‌های کوچک",
+"ساخت یک پروژه واقعی"
+],
+
+"انگلیسی":[
+"مشخص کردن سطح فعلی",
+"یادگیری کلمات پرکاربرد",
+"تمرین جمله‌سازی",
+"تمرین شنیداری",
+"تمرین مکالمه",
+"مرور روزانه"
+],
+
+"فتوشاپ":[
+"آشنایی با محیط فتوشاپ",
+"یادگیری ابزارهای اصلی",
+"یادگیری لایه‌ها",
+"تمرین ابزارهای انتخاب",
+"اصلاح رنگ و نور",
+"ساخت یک پروژه ساده"
+],
+
+"امتحان":[
+"مشخص کردن مباحث امتحان",
+"تقسیم مطالب به بخش‌های کوچک",
+"مطالعه روزانه",
+"حل نمونه سؤال",
+"مرور مطالب",
+"مرور نهایی"
+],"ورزش":[
+"مشخص کردن هدف",
+"انتخاب فعالیت مناسب",
+"شروع با تمرین سبک",
+"یادگیری حرکت‌های درست",
+"تمرین منظم",
+"بررسی پیشرفت"
+],
+
+"مهارت":[
+"مشخص کردن مهارت موردنظر",
+"پیدا کردن منابع مناسب",
+"یادگیری یک بخش کوچک",
+"تمرین عملی",
+"ساخت یک پروژه کوچک",
+"تمرین منظم"
+]
+
+};
+
+function findGoal(goal){
+
+let text = goal.toLowerCase();
+
+for(let key in goalSteps){
+
+if(text.includes(key)){
+return goalSteps[key];
+}
+
+}
+
+return[
+"هدفت رو دقیق مشخص کن",
+"اطلاعات اولیه رو پیدا کن",
+"کار رو به بخش‌های کوچک تقسیم کن",
+"اولین قدم رو شروع کن",
+"به‌صورت منظم ادامه بده",
+"پیشرفتت رو بررسی کن"
+];
+
+}function start(){
+
+let goal = document.getElementById("goal").value.trim();
 
 if(!goal){
 alert("اول هدفت رو بنویس 😊");
 return;
 }
 
-let steps;
+currentSteps = findGoal(goal);
 
-if(
-goal.includes("فتوشاپ") ||
-goal.includes("طراحی") ||
-goal.includes("گرافیک")
-){
-steps=[
-"۱. آشنایی با محیط و ابزارهای اصلی",
-"۲. یادگیری لایه‌ها و ماسک‌ها",
-"۳. تمرین ابزارهای انتخاب و برش",
-"۴. یادگیری رنگ و نور",
-"۵. ساخت یک پروژه ساده"
-];
-}
+document.getElementById("title").innerText =
+"مسیر شروع برای: " + goal;
 
-else if(
-goal.includes("برنامه") ||
-goal.includes("کدنویسی") ||
-goal.includes("پایتون") ||
-goal.includes("جاوا") ||
-goal.includes("وب")
-){
-steps=[
-"۱. انتخاب زبان برنامه‌نویسی",
-"۲. نصب ابزارهای لازم",
-"۳. یادگیری مفاهیم پایه",
-"۴. تمرین با پروژه‌های کوچک",
-"۵. ساخت اولین پروژه"
-];
-}
+let steps = document.querySelectorAll(".step");
 
-else if(
-goal.includes("انگلیسی") ||
-goal.includes("زبان")
-){
-steps=[
-"۱. مشخص کردن سطح فعلی",
-"۲. یادگیری کلمات پرکاربرد",
-"۳. تمرین جمله‌سازی",
-"۴. تمرین شنیدن و صحبت کردن",
-"۵. مرور و تمرین روزانه"
-];else if(
-goal.includes("ورزش") ||
-goal.includes("باشگاه") ||
-goal.includes("تمرین")
-){
-steps=[
-"۱. مشخص کردن هدف",
-"۲. انتخاب فعالیت مناسب",
-"۳. شروع با تمرین سبک",
-"۴. یادگیری حرکات درست",
-"۵. ادامه دادن منظم"
-];
-}
+steps.forEach(function(step,index){
 
-else if(
-goal.includes("درس") ||
-goal.includes("مطالعه") ||
-goal.includes("امتحان")
-){
-steps=[
-"۱. مشخص کردن موضوع",
-"۲. تقسیم مطالب به بخش‌های کوچک",
-"۳. مطالعه و یادگیری",
-"۴. حل نمونه سؤال",
-"۵. مرور مطالب"
-];
-}
-
-else if(
-goal.includes("مهارت") ||
-goal.includes("یادگیری")
-){
-steps=[
-"۱. مشخص کردن مهارت موردنظر",
-"۲. پیدا کردن منابع مناسب",
-"۳. یادگیری یک بخش کوچک",
-"۴. تمرین عملی",
-"۵. ساخت یک پروژه کوچک"
-];
-}
-
-else{
-steps=[
-"۱. هدفت رو دقیق مشخص کن",
-"۲. اطلاعات اولیه رو پیدا کن",
-"۳. یک کار کوچک انتخاب کن",
-"۴. شروعش کن"
-];
-}
-
-currentSteps=steps;
-
-document.getElementById("title").innerText=
-"مسیر شروع برای: "+goal;let stepElements=document.querySelectorAll(".step");
-
-stepElements.forEach(function(step,index){
-
-if(currentSteps[index]){
-step.innerText=currentSteps[index];
-step.style.display="block";
-}else{
-step.style.display="none";
-}
+step.innerText = currentSteps[index];
 
 step.classList.remove("done");
 
-step.onclick=function(){
+step.onclick = function(){
 
 step.classList.toggle("done");
 
@@ -595,9 +465,9 @@ updateProgress();
 
 });
 
-document.getElementById("result").style.display="block";
+document.getElementById("result").style.display = "block";
 
-document.getElementById("finish").style.display="none";
+document.getElementById("finish").style.display = "none";
 
 updateProgress();
 
@@ -605,48 +475,74 @@ document.getElementById("result").scrollIntoView({
 behavior:"smooth"
 });
 
-}
-}
-function updateProgress(){
+}function updateProgress(){
 
-let steps=document.querySelectorAll(".step");
+let done = document.querySelectorAll(".step.done").length;
+let total = currentSteps.length;
 
-let done=document.querySelectorAll(".step.done").length;
+let percent = (done / total) * 100;
 
-let total=steps.length;
+document.getElementById("progressBar").style.width =
+percent + "%";
 
-let percent=(done/total)*100;
+document.getElementById("progressText").innerText =
+done + " از " + total;
 
-document.getElementById("progressBar").style.width=
-percent+"%";
+if(done === total){
 
-document.getElementById("progressText").innerText=
-done+" از "+total;
+document.getElementById("finish").style.display = "block";
 
-if(done===total){
-document.getElementById("finish").style.display="block";
+celebrate();
+
 }else{
-document.getElementById("finish").style.display="none";
+
+document.getElementById("finish").style.display = "none";
+
+}
+
+}
+
+function celebrate(){
+
+for(let i = 0; i < 25; i++){
+
+let piece = document.createElement("div");
+
+piece.className = "confetti";
+
+piece.style.left = Math.random() * 100 + "vw";
+
+piece.style.background =
+"hsl(" + Math.random() * 360 + ",80%,60%)";
+
+piece.style.animationDelay =
+Math.random() * .5 + "s";
+
+document.body.appendChild(piece);
+
+setTimeout(function(){
+piece.remove();
+},2500);
+
 }
 
 }function newGoal(){
 
-document.getElementById("goal").value="";
+document.getElementById("goal").value = "";
 
-document.getElementById("result").style.display="none";
+document.getElementById("result").style.display = "none";
 
 window.scrollTo({
-top:0,
-behavior:"smooth"
+top: 0,
+behavior: "smooth"
 });
 
 }
 
-document.getElementById("goal").addEventListener(
-"keydown",
-function(event){
+document.getElementById("goal")
+.addEventListener("keydown", function(event){
 
-if(event.key==="Enter"){
+if(event.key === "Enter"){
 start();
 }
 
